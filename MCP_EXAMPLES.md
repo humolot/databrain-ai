@@ -293,4 +293,4 @@ https://modelcontextprotocol.io/
 
 - MCP Documentation: https://modelcontextprotocol.io/
 - MCP Server Registry: https://github.com/modelcontextprotocol/servers
-- DataBrain AI Issues: https://github.com/humolot/databrain/issues
+- DataBrain AI Issues: https://github.com/humolot/databrain-ai/issues
