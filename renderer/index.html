@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataBrain AI</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tokyo-night-dark.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <rect width="32" height="32" rx="8" fill="#FF6B00"/>
+                        <path d="M16 8L22 12V20L16 24L10 20V12L16 8Z" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+                        <circle cx="16" cy="16" r="3" fill="white"/>
+                    </svg>
+                    <span class="logo-text">DataBrain</span>
+                </div>
+                <button class="new-chat-btn" id="newChatBtn">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 4V16M4 10H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    New Chat
+                </button>
+            </div>
+
+            <div class="chat-list" id="chatList">
+                <!-- Chat items will be inserted here -->
+            </div>
+
+            <div class="sidebar-footer">
+                <button class="settings-btn" id="settingsBtn">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M10 1V3M10 17V19M19 10H17M3 10H1M16.364 16.364L14.95 14.95M5.05 5.05L3.636 3.636M16.364 3.636L14.95 5.05M5.05 14.95L3.636 16.364" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    Settings
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Welcome Screen -->
+            <div class="welcome-screen" id="welcomeScreen">
+                <div class="welcome-content">
+                    <div class="welcome-icon">
+                        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                            <rect width="80" height="80" rx="20" fill="#FF6B00" opacity="0.1"/>
+                            <path d="M40 20L55 30V50L40 60L25 50V30L40 20Z" stroke="#FF6B00" stroke-width="3" stroke-linejoin="round"/>
+                            <circle cx="40" cy="40" r="8" fill="#FF6B00"/>
+                        </svg>
+                    </div>
+                    <h1>Welcome to DataBrain AI</h1>
+                    <p>Your professional AI assistant powered by GoodBits</p>
+                    <div class="welcome-features">
+                        <div class="feature">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#FF6B00" stroke-width="2" stroke-linejoin="round"/>
+                                <path d="M2 17L12 22L22 17" stroke="#FF6B00" stroke-width="2" stroke-linejoin="round"/>
+                                <path d="M2 12L12 17L22 12" stroke="#FF6B00" stroke-width="2" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Advanced AI Models</span>
+                        </div>
+                        <div class="feature">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="#FF6B00" stroke-width="2" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Code Understanding</span>
+                        </div>
+                        <div class="feature">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M21 15V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H9" stroke="#FF6B00" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M14 3H21V10" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M10 14L21 3" stroke="#FF6B00" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                            <span>File Support</span>
+                        </div>
+                    </div>
+                    <button class="start-btn" id="startChatBtn">Start Chatting</button>
+                </div>
+            </div>
+
+            <!-- Chat Screen -->
+            <div class="chat-screen hidden" id="chatScreen">
+                <div class="chat-header">
+                    <div class="chat-title" id="chatTitle">New Chat</div>
+                    <div class="chat-actions">
+                        <button class="icon-btn" id="exportChatBtn" title="Export Chat">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                <path d="M9 3V11M9 3L6 6M9 3L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M3 12V14C3 14.5523 3.44772 15 4 15H14C14.5523 15 15 14.5523 15 14V12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        <button class="icon-btn" id="importChatBtn" title="Import Chat">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                <path d="M9 11V3M9 11L6 8M9 11L12 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M3 12V14C3 14.5523 3.44772 15 4 15H14C14.5523 15 15 14.5523 15 14V12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        <button class="icon-btn" id="renameChatBtn" title="Rename">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                <path d="M12.5 2.5L15.5 5.5L6 15H3V12L12.5 2.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <button class="icon-btn" id="deleteChatBtn" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                <path d="M3 5H15M7 8V13M11 8V13M4 5L5 15C5 15.5523 5.44772 16 6 16H12C12.5523 16 13 15.5523 13 15L14 5M7 5V3C7 2.44772 7.44772 2 8 2H10C10.5523 2 11 2.44772 11 3V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="messages-container" id="messagesContainer">
+                    <!-- Messages will be inserted here -->
+                </div>
+
+                <div class="input-area">
+                    <div class="attachments-preview" id="attachmentsPreview"></div>
+                    <div class="input-controls">
+                        <div class="model-selector-inline">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 2L12 5V11L8 14L4 11V5L8 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                                <circle cx="8" cy="8" r="2" fill="currentColor"/>
+                            </svg>
+                            <select id="currentModelSelect" title="Select AI Model">
+                                <option value="">Loading...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-wrapper">
+                        <button class="attach-btn" id="attachBtn" title="Attach file">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.5 7.5L10 14C8.61929 15.3807 6.38071 15.3807 5 14C3.61929 12.6193 3.61929 10.3807 5 9L11.5 2.5C12.3284 1.67157 13.6716 1.67157 14.5 2.5C15.3284 3.32843 15.3284 4.67157 14.5 5.5L8 12C7.58579 12.4142 6.91421 12.4142 6.5 12C6.08579 11.5858 6.08579 10.9142 6.5 10.5L12 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <textarea 
+                            id="messageInput" 
+                            placeholder="Message DataBrain AI..." 
+                            rows="1"
+                        ></textarea>
+                        <button class="send-btn" id="sendBtn">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M18 2L9 11M18 2L12 18L9 11M18 2L2 8L9 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal hidden" id="settingsModal">
+        <div class="modal-content settings-modal-large">
+            <div class="modal-header">
+                <h2>Settings</h2>
+                <button class="close-modal" id="closeSettings">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="settings-tabs">
+                <button class="tab-btn active" data-tab="ai-settings">AI Providers</button>
+                <button class="tab-btn" data-tab="mcp-settings">MCP Servers</button>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content active" id="ai-settings">
+                <div class="setting-group">
+                    <label for="aiProvider">AI Provider</label>
+                    <select id="aiProvider">
+                        <option value="openai">OpenAI (GPT-4o, o1, GPT-4)</option>
+                        <option value="anthropic">Anthropic (Claude 3.5)</option>
+                        <option value="google">Google (Gemini 2.0, 1.5)</option>
+                        <option value="deepseek">DeepSeek (V3, Reasoner R1)</option>
+                        <option value="groq">Groq (LLaMA 3.3, Fast)</option>
+                        <option value="openrouter">OpenRouter (All Models)</option>
+                    </select>
+                    <small>Select your preferred AI provider</small>
+                </div>
+
+                <!-- OpenAI Settings -->
+                <div class="setting-group provider-settings" id="openai-settings">
+                    <label for="openaiKey">OpenAI API Key</label>
+                    <input type="password" id="openaiKey" placeholder="sk-...">
+                    <small>Get your key at: https://platform.openai.com/api-keys</small>
+                </div>
+
+                <!-- Anthropic Settings -->
+                <div class="setting-group provider-settings hidden" id="anthropic-settings">
+                    <label for="anthropicKey">Anthropic API Key</label>
+                    <input type="password" id="anthropicKey" placeholder="sk-ant-...">
+                    <small>Get your key at: https://console.anthropic.com/</small>
+                </div>
+
+                <!-- Google Settings -->
+                <div class="setting-group provider-settings hidden" id="google-settings">
+                    <label for="googleKey">Google API Key</label>
+                    <input type="password" id="googleKey" placeholder="AIza...">
+                    <small>Get your key at: https://makersuite.google.com/app/apikey</small>
+                </div>
+
+                <!-- DeepSeek Settings -->
+                <div class="setting-group provider-settings hidden" id="deepseek-settings">
+                    <label for="deepseekKey">DeepSeek API Key</label>
+                    <input type="password" id="deepseekKey" placeholder="sk-...">
+                    <small>Get your key at: https://platform.deepseek.com/api_keys</small>
+                </div>
+
+                <!-- Groq Settings -->
+                <div class="setting-group provider-settings hidden" id="groq-settings">
+                    <label for="groqKey">Groq API Key</label>
+                    <input type="password" id="groqKey" placeholder="gsk_...">
+                    <small>Get your key at: https://console.groq.com/keys</small>
+                </div>
+
+                <!-- OpenRouter Settings -->
+                <div class="setting-group provider-settings hidden" id="openrouter-settings">
+                    <label for="openrouterKey">OpenRouter API Key</label>
+                    <input type="password" id="openrouterKey" placeholder="sk-or-...">
+                    <small>Get your key at: https://openrouter.ai/keys</small>
+                </div>
+
+                <div class="setting-group">
+                    <label for="modelSelect">Default Model</label>
+                    <select id="modelSelect">
+                        <!-- Options will be populated based on provider -->
+                    </select>
+                    <small id="modelInfo"></small>
+                </div>
+
+                <div class="setting-group">
+                    <label for="systemPrompt">System Prompt (Optional)</label>
+                    <textarea id="systemPrompt" rows="3" placeholder="You are a helpful assistant..." style="width: 100%; padding: 12px; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-md); color: var(--text-primary); font-family: inherit; resize: vertical;"></textarea>
+                    <small>Custom instructions for the AI</small>
+                </div>
+                </div>
+
+                <!-- MCP Settings Tab -->
+                <div class="tab-content" id="mcp-settings">
+                    <div class="mcp-header">
+                        <h3>MCP Servers</h3>
+                        <button class="btn-primary btn-sm" id="addMcpServerBtn">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 3V13M3 8H13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                            Add Server
+                        </button>
+                    </div>
+                    <p class="mcp-description">Connect to MCP servers to extend AI capabilities with tools like filesystem access, web search, databases, and more.</p>
+
+                    <div id="mcpServersList" class="mcp-servers-list">
+                        <!-- MCP servers will be listed here -->
+                    </div>
+
+                    <!-- Add MCP Server Form (Initially Hidden) -->
+                    <div id="mcpServerForm" class="mcp-server-form hidden">
+                        <h4>Add MCP Server</h4>
+                        <div class="setting-group">
+                            <label for="mcpServerName">Server Name</label>
+                            <input type="text" id="mcpServerName" placeholder="e.g., filesystem, web-search">
+                            <small>Unique identifier for this server</small>
+                        </div>
+                        <div class="setting-group">
+                            <label for="mcpServerCommand">Command</label>
+                            <input type="text" id="mcpServerCommand" placeholder="e.g., npx, node, python">
+                            <small>Command to execute the server</small>
+                        </div>
+                        <div class="setting-group">
+                            <label for="mcpServerArgs">Arguments</label>
+                            <input type="text" id="mcpServerArgs" placeholder="e.g., -y @modelcontextprotocol/server-filesystem /path">
+                            <small>Space-separated arguments (one per line or space-separated)</small>
+                        </div>
+                        <div class="setting-group">
+                            <label for="mcpServerEnv">Environment Variables (Optional)</label>
+                            <textarea id="mcpServerEnv" rows="3" placeholder='{"KEY": "value"}'></textarea>
+                            <small>JSON object with environment variables</small>
+                        </div>
+                        <div class="form-buttons">
+                            <button class="btn-secondary btn-sm" id="cancelMcpServerBtn">Cancel</button>
+                            <button class="btn-primary btn-sm" id="saveMcpServerBtn">Connect</button>
+                        </div>
+                    </div>
+
+                    <!-- MCP Examples -->
+                    <div class="mcp-examples">
+                        <h4>Quick Start Examples</h4>
+                        <div class="mcp-example-item">
+                            <strong>Filesystem (Easiest to test)</strong>
+                            <small>Command: <code>npx</code></small>
+                            <small>Args: <code>-y @modelcontextprotocol/server-filesystem D:\databrain-ai</code></small>
+                        </div>
+                        <div class="mcp-example-item">
+                            <strong>Brave Search</strong>
+                            <small>Command: <code>npx</code></small>
+                            <small>Args: <code>-y @modelcontextprotocol/server-brave-search</code></small>
+                            <small>Env: <code>{"BRAVE_API_KEY": "your-key"}</code></small>
+                        </div>
+                        <div class="mcp-example-item">
+                            <strong>GitHub</strong>
+                            <small>Command: <code>npx</code></small>
+                            <small>Args: <code>-y @modelcontextprotocol/server-github</code></small>
+                            <small>Env: <code>{"GITHUB_TOKEN": "your-token"}</code></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="cancelSettings">Cancel</button>
+                <button class="btn-primary" id="saveSettings">Save Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export Modal -->
+    <div class="modal hidden" id="exportModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Export Chat</h2>
+                <button class="close-modal" id="closeExport">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="setting-group">
+                    <label>Export Format</label>
+                    <div class="export-options">
+                        <button class="export-option-btn" data-format="json">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14 2V8H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>JSON</span>
+                            <small>For developers & backup</small>
+                        </button>
+                        <button class="export-option-btn" data-format="markdown">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Markdown</span>
+                            <small>Formatted text with code blocks</small>
+                        </button>
+                        <button class="export-option-btn" data-format="txt">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Plain Text</span>
+                            <small>Simple text file</small>
+                        </button>
+                        <button class="export-option-btn" data-format="chatgpt">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                                <path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                            <span>ChatGPT JSON</span>
+                            <small>Compatible with ChatGPT import</small>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/11.1.1/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

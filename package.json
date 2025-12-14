@@ -1,0 +1,81 @@
+{
+  "name": "databrain-ai",
+  "version": "2.0.0",
+  "description": "DataBrain AI - Professional Multi-Provider AI Desktop Interface",
+  "main": "main.js",
+  "author": {
+    "name": "@Humolot",
+    "email": "databrain@humolot.dev"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/databrain-ai/databrain"
+  },
+  "keywords": [
+    "ai",
+    "openai",
+    "anthropic",
+    "claude",
+    "gemini",
+    "deepseek",
+    "electron",
+    "desktop",
+    "chatbot",
+    "gpt",
+    "llm"
+  ],
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux"
+  },
+  "dependencies": {
+	  "@modelcontextprotocol/sdk": "^1.24.3",
+	  "highlight.js": "^11.9.0",
+	  "mammoth": "^1.6.0",
+	  "marked": "^11.1.1",
+	  "openai": "^4.20.1",
+	  "pdf-parse": "^1.1.1"
+  },
+  "devDependencies": {
+    "electron": "^28.1.0",
+    "electron-builder": "^24.9.1",
+    "electron-rebuild": "^3.2.9"
+  },
+  "build": {
+    "appId": "com.databrain.ai",
+    "productName": "DataBrain AI",
+    "directories": {
+      "output": "dist"
+    },
+	"files": [
+		"main.js",
+		"preload.js",
+		"database.js",
+		"mcp-manager.js",
+		"renderer/**/*",
+		"assets/**/*"
+	],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "assets/icon.png"
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "icon": "assets/icon.png"
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "icon": "assets/icon.png"
+    }
+  }
+}
