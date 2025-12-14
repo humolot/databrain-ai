@@ -30,28 +30,28 @@ Model Context Protocol (MCP) is an open protocol that enables AI models to secur
 ```
 ┌─────────────────────────────────────────┐
 │         DataBrain AI (You)              │
-│                                          │
+│                                         │
 │  "Search for the latest AI news"        │
 └──────────────────┬──────────────────────┘
                    │
                    ▼
 ┌─────────────────────────────────────────┐
 │      DataBrain AI (MCP Client)          │
-│                                          │
+│                                         │
 │  Decides to use: brave-search::search   │
 └──────────────────┬──────────────────────┘
                    │
                    ▼
 ┌─────────────────────────────────────────┐
 │    MCP Server (Brave Search)            │
-│                                          │
+│                                         │
 │  Executes web search and returns results│
 └──────────────────┬──────────────────────┘
                    │
                    ▼
 ┌─────────────────────────────────────────┐
 │         DataBrain AI Response           │
-│                                          │
+│                                         │
 │  "Here's what I found: [results]..."    │
 └─────────────────────────────────────────┘
 ```
